@@ -51,8 +51,11 @@ class Game:
             for player in self.players:
                 while True:
                     row, column = self.playMove(player)
-                    checkedRow, checkedColumn = self.grid.playMove(row, column, player.getLetter())
-                    break
+                    try:
+                        checkedRow, checkedColumn = self.grid.playMove(row, column, player.getLetter())
+                        break
+                    except TypeError:
+                        print("Invalid move. Try again.")
                 self.grid.playMove(checkedRow, checkedColumn, player.getLetter())
                 letter = player.getLetter()
                 if self.grid.winner(self.wc, row, column, letter):
