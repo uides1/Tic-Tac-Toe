@@ -35,16 +35,14 @@ class Game:
         if 'computer' in player.getName().lower():
             row, column = choice(self.grid.availableMove())
             print(f"{player.getName()}\'s turn, They put {'X' if player.getLetter() == GridPosition.X else 'O'} at row: {row}, column: {column}")
+            return int(row), int(column)
         else:
-            valid = False
-            while not valid:
+            while True:
                 try:
                     row, column = input(f'{player.getName()}\'s turn, Enter your move (row, column): ').split(' ')
+                    return int(row), int(column)
                 except ValueError:
                     print('Please enter a valid row and column.')
-                valid = True
-
-        return int(row), int(column)
 
     def playRound(self, player):
         while True:
@@ -62,7 +60,6 @@ class Game:
                     self.score[player.getName()] += 1
                     return player
             self.currentPlayer = 0 if player.getName() == GridPosition.X else 1
-
 
     def play(self):
         highestScore = 0
